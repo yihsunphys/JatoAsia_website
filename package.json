@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev": "eleventy --serve --watch",
-  "build": "eleventy"
+  "dev": "node node_modules/@11ty/eleventy/cmd.js --serve --watch",
+  "build": "node node_modules/@11ty/eleventy/cmd.js"
   },
   "keywords": [],
   "author": "",

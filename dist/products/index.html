@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>商品</title>
 
-  <!-- 多語 SEO 建議：依實際站點調整 -->
+  <!-- 多語 SEO（依實際部署再細調 hreflang 與 href） -->
   <link rel="alternate" hreflang="zh-Hant" href="/products/" />
+  <link rel="alternate" hreflang="zh-Hans" href="/products/?lang=zh-Hans" />
   <link rel="alternate" hreflang="en" href="/products/?lang=en" />
+  <link rel="alternate" hreflang="de" href="/products/?lang=de" />
   <meta name="theme-color" content="#0a0d14" />
 
-  <!-- 高質感中英文字體（Noto Sans TC + Inter） -->
+  <!-- 高質感字體 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -31,13 +33,14 @@
     *{ box-sizing:border-box; margin:0; padding:0; }
     html,body{ height:100%; }
     body{
-      font-family: "Inter","Noto Sans TC",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      font-family:"Inter","Noto Sans TC",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
       line-height:1.7; color:var(--text); background:#05070c;
       background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.015"/></svg>'), var(--bg);
-      background-attachment:fixed,fixed; letter-spacing:.1px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      background-attachment:fixed,fixed; letter-spacing:.1px;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Header */
+    /* ===== Header（玻璃＋縮放） ===== */
     header{
       position:fixed; inset:0 0 auto 0; width:100%;
       padding:18px 32px; display:flex; justify-content:space-between; align-items:center;
@@ -50,10 +53,11 @@
     }
     header.scrolled{ background:linear-gradient(180deg, rgba(6,9,15,.85), rgba(6,9,15,.55)); padding:10px 28px; border-color:rgba(255,255,255,0.12); }
     header strong{ font-size:1.45rem; letter-spacing:.5px; font-weight:600; }
-    nav{ display:flex; align-items:center; gap:20px; }
+
+    nav{ display:flex; align-items:center; gap:20px; flex-wrap:nowrap; }
     nav a{
       position:relative; padding:6px 0; color:var(--text); font-size:1.06rem; text-decoration:none;
-      transition:transform .2s var(--ease), opacity .2s var(--ease); opacity:.95;
+      transition:transform .2s var(--ease), opacity .2s var(--ease); opacity:.95; white-space:nowrap;
     }
     nav a::after{
       content:''; position:absolute; left:0; bottom:-6px; width:100%; height:2px; transform:scaleX(0); transform-origin:left;
@@ -63,7 +67,7 @@
     nav a:hover::after{ transform:scaleX(1); }
 
     /* 語言切換 */
-    .lang-switch{ display:flex; align-items:center; gap:10px; margin-left:8px; }
+    .lang-switch{ display:flex; align-items:center; gap:10px; margin-left:8px; flex-wrap:wrap; }
     .lang-btn{
       padding:4px 10px; border:1px solid rgba(255,255,255,.14); border-radius:8px;
       background:rgba(255,255,255,.04); color:#eaf0f8; cursor:pointer; font-size:.9rem;
@@ -72,10 +76,12 @@
     .lang-btn[aria-current="true"]{ background:#1a6bd8; border-color:#1a6bd8; color:#fff; }
     .lang-btn:hover{ transform:translateY(-1px); border-color:rgba(255,255,255,.24); }
 
-    /* Hero */
+    /* ===== Hero（首頁才顯示） ===== */
     .hero{
-      position:relative; width:100%; height:88vh; /* 稍高，保留下緣 */
-      background-image:var(--hero, url('/images/oil-placeholder.jpg'));
+      position:relative; width:100%;
+      margin-top:var(--header-h,72px);
+      height:calc(88vh - var(--header-h,72px));
+      background-image:var(--hero, url('/images/hero.jpg'));
       background-size:cover; background-position:center 68%; background-repeat:no-repeat;
       display:flex; align-items:center; justify-content:center; overflow:hidden;
     }
@@ -86,9 +92,9 @@
         linear-gradient(180deg, rgba(7,10,17,.30) 0%, rgba(7,10,17,.55) 80%);
       pointer-events:none;
     }
-    @media (prefers-reduced-motion: no-preference){
+    @media (prefers-reduced-motion:no-preference){
       .hero{ animation: kenburns 22s ease-in-out both; }
-      @keyframes kenburns { 0%{background-size:100%;} 50%{background-size:104%;} 100%{background-size:101.5%;} }
+      @keyframes kenburns { 0%{ background-size:100%; } 50%{ background-size:104%; } 100%{ background-size:101.5%; } }
     }
     .hero-overlay{ text-align:center; color:#fff; text-shadow:0 6px 28px rgba(0,0,0,.5); padding:0 20px; }
     .hero-overlay h1{
@@ -101,9 +107,10 @@
     }
     @keyframes fadeUp{ to{ opacity:1; transform:translateY(0);} }
 
+    /* ===== Main ===== */
     main{ flex:1; padding:56px 20px 40px; max-width:1200px; margin:0 auto; width:100%; }
 
-    /* 區塊標題 */
+    /* ===== Section 標題底線動畫 ===== */
     .section-title{
       font-size:clamp(1.5rem, 2.2vw, 1.8rem); text-align:center; margin:0 auto 26px; color:#F2F5FA;
       position:relative; display:inline-block; opacity:0; transform:translateY(16px);
@@ -117,7 +124,7 @@
     .section-title.animate-underline{ opacity:1; transform:translateY(0); }
     .section-title.animate-underline::after{ transform:translateX(-50%) scaleX(1); }
 
-    /* 最新消息卡片 */
+    /* ===== 最新消息 ===== */
     .news-section{ margin:80px auto; max-width:1000px; padding:0 20px; }
     .news-section h2{ color:#F2F5FA; }
     .news-list{ display:flex; flex-direction:column; gap:18px; }
@@ -146,7 +153,7 @@
       .pagination button{ padding:5px 10px; font-size:.8rem; }
     }
 
-    /* 關於我們 */
+    /* ===== 關於我們（絲緞玻璃） ===== */
     .about-section{
       position:relative; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
       padding:80px 20px; color:#fff; text-align:center; width:100vw; margin-left:calc(-50vw + 50%);
@@ -155,11 +162,11 @@
     .about-section h2{ color:#F2F5FA; font-size:1.6rem; margin-bottom:16px; }
     .about-section p{ max-width:820px; margin:0 auto; color:#D6DEEA; font-size:1rem; line-height:1.9; }
 
-    /* 產品分類卡 */
+    /* ===== 產品分類卡（左右交錯，去圓角） ===== */
     .categories{ padding-top:60px; margin-bottom:80px; }
     .categories h2{ color:#F2F5FA; }
     .category-row{
-      display:flex; align-items:center; background:var(--card-bg); border-radius:0; /* 按你需求去掉圓角 */
+      display:flex; align-items:center; background:var(--card-bg); border-radius:0;
       margin-top:40px; margin-bottom:30px; overflow:hidden; box-shadow:var(--glow); border:1px solid rgba(255,255,255,0.08);
       opacity:0; transform:translateY(34px); transition:transform .7s var(--ease), opacity .7s var(--ease), box-shadow .35s var(--ease);
     }
@@ -172,7 +179,7 @@
     .category-info p{ font-size:1rem; color:#A9B3C2; }
     .category-row.reverse{ flex-direction:row-reverse; }
 
-    /* 商品卡 */
+    /* ===== 商品卡 ===== */
     .page-title{ font-size:2rem; text-align:center; margin:30px 0; color:#F2F5FA; }
     .product-row{ display:flex; background:var(--card-bg); border-radius:16px; box-shadow:var(--glow); margin-bottom:28px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease); }
     .product-row:hover{ transform:translateY(-3px); border-color:rgba(255,255,255,0.12); box-shadow:0 16px 36px rgba(0,0,0,.45); }
@@ -194,7 +201,7 @@
     .btn.primary{ background:linear-gradient(180deg, #1a6bd8, #1152a5); border-color:#1762c0; color:#fff; box-shadow:0 10px 20px rgba(26,107,216,.28); }
     .btn.primary:hover{ background:linear-gradient(180deg, #1c74ec, #1150a0); }
 
-    /* Footer */
+    /* ===== Footer（玻璃質感＋金藍點綴） ===== */
     .site-footer{
       background:linear-gradient(180deg, rgba(5,7,12,.85), rgba(5,7,12,.94));
       border-top:1px solid rgba(255,255,255,0.08);
@@ -203,11 +210,14 @@
     }
     .site-footer::before{ content:""; position:absolute; left:0; right:0; top:0; height:1px; background:linear-gradient(90deg, #C9B06E, #2A9BFF); opacity:.5; }
     .site-footer::after{ content:""; position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(800px 400px at 15% 0%, rgba(42,155,255,.08), transparent 55%), radial-gradient(600px 300px at 85% 100%, rgba(201,176,110,.08), transparent 55%); }
+
     .footer-inner{ max-width:1100px; margin:0 auto 8px; }
     .footer-brand{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+    .brand-mark svg{ display:block; }
     .brand-text{ display:flex; flex-direction:column; }
     .brand-name{ font-weight:700; color:#F4F7FB; letter-spacing:.3px; }
     .brand-tag{ color:#9fb0c5; font-size:.92rem; }
+
     .footer-grid{ display:grid; grid-template-columns:repeat(4, minmax(160px, 1fr)); gap:14px; }
     .footer-item{
       display:flex; align-items:center; gap:12px; padding:12px 14px; border:1px solid rgba(255,255,255,.08);
@@ -215,19 +225,30 @@
       transition:transform .25s var(--ease), border-color .25s, background .25s, box-shadow .25s;
     }
     .footer-item:hover{ transform:translateY(-2px); border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.05); box-shadow:0 10px 24px rgba(0,0,0,.28); }
-    .footer-item .icon{ flex:0 0 36px; height:36px; width:36px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); color:#DCD7C4; }
+    .footer-item .icon{
+      flex:0 0 36px; height:36px; width:36px; display:grid; place-items:center; border-radius:10px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.10); color:#DCD7C4;
+    }
     .footer-item .icon svg{ width:20px; height:20px; }
     .footer-item .text{ display:flex; flex-direction:column; line-height:1.35; }
     .footer-item .label{ font-size:.78rem; letter-spacing:.3px; color:#AAB7C8; }
     .footer-item .value{ font-size:.98rem; color:#F4F7FB; }
+
     .footer-meta{ margin-top:18px; text-align:center; }
     .footer-meta small{ color:#7c89a0; font-size:.82rem; }
     .sr-only{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 
-    /* RWD */
+    /* ===== RWD ===== */
     @media (max-width:1100px){ .footer-grid{ grid-template-columns:repeat(3, minmax(160px, 1fr)); } }
     @media (max-width:768px){
-      .hero{ height:70vh; background-position:center 60%; }
+      header{ padding:8px 14px !important; border-bottom:1px solid rgba(255,255,255,0.12); }
+      header strong{ font-size:1.1rem !important; }
+      nav{ gap:10px !important; flex-wrap:wrap; }
+      nav a{ font-size:.95rem !important; padding:4px 0 !important; }
+      .lang-switch{ gap:6px !important; }
+      .lang-btn{ padding:3px 8px !important; font-size:.85rem !important; }
+
+      .hero{ height:calc(70vh - var(--header-h,56px)); background-position:center 60%; }
       .category-row, .category-row.reverse{ flex-direction:column; }
       .category-row img{ width:100%; height:200px; }
       .product-images{ flex-basis:100%; border-right:none; border-bottom:1px solid rgba(255,255,255,0.06); }
@@ -238,18 +259,20 @@
 </head>
 
 <body>
-
 <header>
   <strong>振亞國際有限股份公司</strong>
   <nav>
     <a href="/" data-i18n="nav.home">首頁</a>
     <a href="/products/" data-i18n="nav.products">商品</a>
     <div class="lang-switch" aria-label="Language">
-      <button class="lang-btn" data-lang="zh" aria-current="true">繁中</button>
+      <button class="lang-btn" data-lang="zh-Hant" aria-current="true">繁中</button>
+      <button class="lang-btn" data-lang="zh-Hans">简中</button>
       <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
     </div>
   </nav>
 </header>
+
 
 
 <main>
@@ -382,7 +405,6 @@
     </div>
 
     <div class="footer-grid">
-
       <!-- 電話 -->
       <a class="footer-item" href="tel:+88661234567" aria-label="撥打電話">
         <span class="icon" aria-hidden="true">
@@ -435,121 +457,112 @@
 </footer>
 
 <script>
-  /* ===== 多語字典（固定文案） ===== */
-  const I18N = {
-    zh: {
-      "nav.home": "首頁",
-      "nav.products": "商品",
-      "hero.title": "振亞國際有限公司",
-      "hero.subtitle": "JATOASIAOIL.INTERNATIONAL.CO.LTD",
-      "sections.news": "最新消息",
-      "sections.about": "關於我們",
-      "about.desc": "振亞國際專注於汽車化工產品的研發與銷售，致力於提供高品質的潤滑油、燃油添加劑與保養產品。我們擁有超過 20 年業界經驗，服務全台汽車維修與保養產業，深獲客戶信賴。",
-      "cat.oil.title": "潤滑油",
-      "cat.oil.desc": "高性能潤滑油，延長引擎壽命。",
-      "cat.fuel.title": "汽油油精",
-      "cat.fuel.desc": "提升燃燒效率，降低碳積。",
-      "brand.name": "振亞國際有限股份公司",
-      "brand.tag": "高品質汽車化工｜專業服務",
-      "footer.store.label": "店家",
-      "footer.store.value": "振亞國際有限股份公司",
-      "footer.phone.label": "電話",
-      "footer.addr.label": "地址",
-      "footer.addr.value": "台南市中西區某街道 123 號",
-      "pagination.prev": "上一頁",
-      "pagination.next": "下一頁"
-    },
-    en: {
-      "nav.home": "Home",
-      "nav.products": "Products",
-      "hero.title": "Zhenya International Co., Ltd.",
-      "hero.subtitle": "JATOASIAOIL.INTERNATIONAL.CO.LTD",
-      "sections.news": "News",
-      "sections.about": "About Us",
-      "about.desc": "Zhenya focuses on R&D and distribution of automotive chemical products, offering high-quality lubricants, fuel additives, and maintenance solutions with over 20 years of industry experience in Taiwan.",
-      "cat.oil.title": "Lubricant Oil",
-      "cat.oil.desc": "High-performance lubricants to extend engine life.",
-      "cat.fuel.title": "Fuel Additive",
-      "cat.fuel.desc": "Improve combustion efficiency and reduce carbon deposits.",
-      "brand.name": "Zhenya International Co., Ltd.",
-      "brand.tag": "Premium Automotive Chemicals",
-      "footer.store.label": "Company",
-      "footer.store.value": "Zhenya International Co., Ltd.",
-      "footer.phone.label": "Phone",
-      "footer.addr.label": "Address",
-      "footer.addr.value": "No.123, Zhongxi Dist., Tainan City",
-      "pagination.prev": "Prev",
-      "pagination.next": "Next"
-    }
-  };
+/* ===== 1) 動態計算 Header 高度，推開 Hero ===== */
+function setHeaderOffset(){
+  const h = document.querySelector('header')?.offsetHeight || 72;
+  document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+window.addEventListener('resize', setHeaderOffset);
+window.addEventListener('orientationchange', setHeaderOffset);
+setHeaderOffset();
 
-  function getLangFromQuery(){
-    const m = location.search.match(/[?&]lang=(en|zh)\b/);
-    return m ? m[1] : null;
+/* ===== 2) i18n 字典（可擴充） ===== */
+const I18N = {
+  "zh-Hant": {
+    "nav.home":"首頁","nav.products":"商品",
+    "hero.title":"振亞國際有限公司","hero.subtitle":"JATOASIAOIL.INTERNATIONAL.CO.LTD",
+    "sections.news":"最新消息","sections.about":"關於我們",
+    "brand.name":"振亞國際有限股份公司","brand.tag":"高品質汽車化工｜專業服務",
+    "footer.phone.label":"電話","footer.addr.label":"地址","footer.addr.value":"台南市中西區某街道 123 號",
+    "pagination.prev":"上一頁","pagination.next":"下一頁"
+  },
+  "zh-Hans": {
+    "nav.home":"首页","nav.products":"商品",
+    "hero.title":"振亚国际有限公司","hero.subtitle":"JATOASIAOIL.INTERNATIONAL.CO.LTD",
+    "sections.news":"最新消息","sections.about":"关于我们",
+    "brand.name":"振亚国际股份有限公司","brand.tag":"高品质汽车化工｜专业服务",
+    "footer.phone.label":"电话","footer.addr.label":"地址","footer.addr.value":"台南市中西区某街道 123 号",
+    "pagination.prev":"上一页","pagination.next":"下一页"
+  },
+  "en": {
+    "nav.home":"Home","nav.products":"Products",
+    "hero.title":"Zhenya International Co., Ltd.","hero.subtitle":"JATOASIAOIL.INTERNATIONAL.CO.LTD",
+    "sections.news":"News","sections.about":"About Us",
+    "brand.name":"Zhenya International Co., Ltd.","brand.tag":"Premium Automotive Chemicals",
+    "footer.phone.label":"Phone","footer.addr.label":"Address","footer.addr.value":"No.123, Zhongxi Dist., Tainan City",
+    "pagination.prev":"Prev","pagination.next":"Next"
+  },
+  "de": {
+    "nav.home":"Startseite","nav.products":"Produkte",
+    "hero.title":"Zhenya International Co., Ltd.","hero.subtitle":"JATOASIAOIL.INTERNATIONAL.CO.LTD",
+    "sections.news":"Neuigkeiten","sections.about":"Über uns",
+    "brand.name":"Zhenya International Co., Ltd.","brand.tag":"Hochwertige Kfz-Chemie | Profi-Service",
+    "footer.phone.label":"Telefon","footer.addr.label":"Adresse","footer.addr.value":"Nr.123, Bezirk Zhongxi, Stadt Tainan",
+    "pagination.prev":"Zurück","pagination.next":"Weiter"
   }
-  function applyI18n(lang){
-    const dict = I18N[lang] || I18N.zh;
-    document.documentElement.lang = (lang === 'en' ? 'en' : 'zh-Hant');
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const key = el.getAttribute("data-i18n");
-      if(dict[key] != null) el.textContent = dict[key];
+};
+
+/* ===== 3) 語言讀取 / 套用 ===== */
+function getLangFromQuery(){
+  const m = location.search.match(/[?&]lang=(zh-Hant|zh-Hans|en|de)\b/);
+  return m ? m[1] : null;
+}
+function applyI18n(lang){
+  const dict = I18N[lang] || I18N["zh-Hant"];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if (key in dict) el.textContent = dict[key];
+  });
+  document.querySelectorAll(".lang-btn").forEach(btn=>{
+    btn.setAttribute("aria-current", btn.dataset.lang === lang ? "true" : "false");
+  });
+  // 若分頁已生成，更新 tooltip（可選）
+  const prev = document.querySelector(".pagination .prev");
+  const next = document.querySelector(".pagination .next");
+  if(prev && dict["pagination.prev"]) prev.setAttribute("title", dict["pagination.prev"]);
+  if(next && dict["pagination.next"]) next.setAttribute("title", dict["pagination.next"]);
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  /* Header 滾動變色 */
+  const header = document.querySelector('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 50);
+  window.addEventListener('scroll', onScroll); onScroll();
+
+  /* 產品分類進場 */
+  const rowObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }});
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.category-row').forEach(el => rowObserver.observe(el));
+
+  /* 標題底線入場 */
+  const titleObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('animate-underline'); observer.unobserve(entry.target); }});
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.section-title').forEach(el => titleObserver.observe(el));
+
+  /* 商品縮圖切換 */
+  document.querySelectorAll('.product-images').forEach(box=>{
+    const main = box.querySelector('.main-img');
+    box.querySelectorAll('.thumbs img')?.forEach(t=>{
+      t.addEventListener('mouseenter', ()=>{ if(main) main.src = t.src; });
+      t.addEventListener('focus', ()=>{ if(main) main.src = t.src; });
     });
-    // Lang button state
-    document.querySelectorAll(".lang-btn").forEach(btn=>{
-      btn.setAttribute("aria-current", btn.dataset.lang === lang ? "true" : "false");
-    });
-    // Pagination labels（若已建立，更新箭頭 title）
-    const prev = document.querySelector(".pagination .prev");
-    const next = document.querySelector(".pagination .next");
-    if(prev) prev.setAttribute("title", dict["pagination.prev"]);
-    if(next) next.setAttribute("title", dict["pagination.next"]);
-  }
+  });
 
-  const saved = localStorage.getItem("lang");
-  const langFromQuery = getLangFromQuery();
-  const currentLang = langFromQuery || saved || "zh";
-  localStorage.setItem("lang", currentLang);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    /* Header 滾動變色 */
-    const header = document.querySelector('header');
-    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 50);
-    window.addEventListener('scroll', onScroll); onScroll();
-
-    /* 產品分類進場 */
-    const rowObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }});
-    }, { threshold: 0.25 });
-    document.querySelectorAll('.category-row').forEach(el => rowObserver.observe(el));
-
-    /* 標題底線入場 */
-    const titleObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('animate-underline'); observer.unobserve(entry.target); }});
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.section-title').forEach(el => titleObserver.observe(el));
-
-    /* 商品縮圖切換 */
-    document.querySelectorAll('.product-images').forEach(box=>{
-      const main = box.querySelector('.main-img');
-      box.querySelectorAll('.thumbs img')?.forEach(t=>{
-        t.addEventListener('mouseenter', ()=>{ if(main) main.src = t.src; });
-        t.addEventListener('focus', ()=>{ if(main) main.src = t.src; });
-      });
-    });
-
-    /* 分頁 */
-    const itemsPerPage = 3;
-    const newsItems = document.querySelectorAll(".news-list .news-item");
-    const pagination = document.querySelector(".pagination");
+  /* 最新消息分頁（存在才啟動） */
+  const itemsPerPage = 3;
+  const newsItems = document.querySelectorAll(".news-list .news-item");
+  const pagination = document.querySelector(".pagination");
+  if (newsItems.length && pagination) {
     const totalPages = Math.ceil(newsItems.length / itemsPerPage);
     let currentPage = 1;
-
-    function renderPagination() {
+    function renderPagination(dict){
       pagination.innerHTML = "";
       const prevBtn = document.createElement("button");
-      prevBtn.textContent = "«";
-      prevBtn.className = "prev";
-      prevBtn.title = I18N[currentLang]["pagination.prev"];
+      prevBtn.textContent = "«"; prevBtn.className = "prev";
+      prevBtn.title = dict["pagination.prev"] || "Prev";
       prevBtn.disabled = currentPage === 1;
       prevBtn.addEventListener("click", () => showPage(currentPage - 1));
       pagination.appendChild(prevBtn);
@@ -563,37 +576,41 @@
       }
 
       const nextBtn = document.createElement("button");
-      nextBtn.textContent = "»";
-      nextBtn.className = "next";
-      nextBtn.title = I18N[currentLang]["pagination.next"];
+      nextBtn.textContent = "»"; nextBtn.className = "next";
+      nextBtn.title = dict["pagination.next"] || "Next";
       nextBtn.disabled = currentPage === totalPages;
       nextBtn.addEventListener("click", () => showPage(currentPage + 1));
       pagination.appendChild(nextBtn);
     }
-
-    function showPage(page) {
+    function showPage(page){
       currentPage = page;
       newsItems.forEach((item, idx) => {
         item.style.display = (idx >= (page - 1) * itemsPerPage && idx < page * itemsPerPage) ? "block" : "none";
       });
-      renderPagination();
+      renderPagination(I18N[localStorage.getItem("lang")] || I18N["zh-Hant"]);
     }
     showPage(1);
+  }
 
-    /* 語言套用與切換 */
-    applyI18n(currentLang);
-    document.querySelectorAll(".lang-btn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const lang = btn.dataset.lang;
-        localStorage.setItem("lang", lang);
-        // 更新 URL（保留其他 query）
-        const url = new URL(location.href);
-        url.searchParams.set("lang", lang);
-        history.replaceState(null, "", url.toString());
-        applyI18n(lang);
-      });
+  /* 語言初始化與切換 */
+  const langFromQuery = getLangFromQuery();
+  const saved = localStorage.getItem("lang");
+  const currentLang = langFromQuery || saved || "zh-Hant";
+  localStorage.setItem("lang", currentLang);
+  applyI18n(currentLang);
+
+  document.querySelectorAll(".lang-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const lang = btn.dataset.lang; // zh-Hant / zh-Hans / en / de
+      if (!I18N[lang]) return;
+      localStorage.setItem("lang", lang);
+      const url = new URL(location.href);
+      url.searchParams.set("lang", lang);
+      history.replaceState(null, "", url.toString());
+      applyI18n(lang);
     });
   });
+});
 </script>
 </body>
 </html>

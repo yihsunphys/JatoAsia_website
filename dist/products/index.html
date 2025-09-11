@@ -255,10 +255,84 @@
       .product-images .main-img{ max-height:180px; }
       .footer-grid{ grid-template-columns:1fr; }
     }
+    /* Section 裝飾邊線 */
+    /* ===== 角落裝飾 (Corner Accents) ===== */
+    .section-deco {
+      position: relative;
+      padding: 40px 20px;
+    }
+
+    .section-deco::before,
+    .section-deco::after,
+    .section-deco span::before,
+    .section-deco span::after {
+      content: "";
+      position: absolute;
+      width: 40px; height: 40px;
+      border: 1px solid transparent;
+      pointer-events: none;
+    }
+
+    /* 左上 */
+    .section-deco::before {
+      top: 0; left: 0;
+      border-top: 1px solid rgba(201,176,110,.4);
+      border-left: 1px solid rgba(42,155,255,.4);
+    }
+
+    /* 右上 */
+    .section-deco::after {
+      top: 0; right: 0;
+      border-top: 1px solid rgba(42,155,255,.4);
+      border-right: 1px solid rgba(201,176,110,.4);
+    }
+
+    /* 左下 */
+    .section-deco span::before {
+      bottom: 0; left: 0;
+      border-bottom: 1px solid rgba(42,155,255,.4);
+      border-left: 1px solid rgba(201,176,110,.4);
+    }
+
+    /* 右下 */
+    .section-deco span::after {
+      bottom: 0; right: 0;
+      border-bottom: 1px solid rgba(201,176,110,.4);
+      border-right: 1px solid rgba(42,155,255,.4);
+    }
+  .bg-deco {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      /* 網格線 */
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+      /* 斜線 */
+      repeating-linear-gradient(45deg,
+        rgba(42,155,255,.12) 0px,
+        rgba(42,155,255,.12) 2px,
+        transparent 2px,
+        transparent 40px),
+      /* 放射圓環 */
+      radial-gradient(circle at 70% 30%, rgba(201,176,110,.12), transparent 60%),
+      radial-gradient(circle at 20% 80%, rgba(42,155,255,.12), transparent 50%);
+    background-size:
+      60px 60px,
+      60px 60px,
+      200px 200px,
+      cover,
+      cover;
+    opacity: 0.25; /* 先調亮方便檢查 */
+  }
+
+
   </style>
 </head>
 
 <body>
+<div class="bg-deco"></div>
 <header>
   <strong>振亞國際有限股份公司</strong>
   <nav>

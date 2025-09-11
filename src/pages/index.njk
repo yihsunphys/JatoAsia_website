@@ -4,46 +4,77 @@ layout: ../layouts/base.njk
 title: 振亞國際有限公司
 siteName: 振亞國際有限股份公司
 ---
+
 <section class="news-section">
-  <h2 class="section-title">最新消息</h2>
+  <h2 class="section-title" data-i18n="sections.news">最新消息</h2>
+
   <div class="news-list">
     <div class="news-item">
       <h3>官網全新上線</h3>
       <time>2025-09-01</time>
       <p>我們全新改版的官方網站已經上線，提供更佳瀏覽體驗與產品資訊。</p>
     </div>
+
     <div class="news-item">
-      <h3>新品上市：極速潤滑油</h3>
+      <h3>測試消息</h3>
       <time>2025-08-15</time>
-      <p>最新一代全合成潤滑油現已推出，適用於各式車輛，提供卓越保護。</p>
+      <p>測試消息</p>
+    </div>
+
+    <div class="news-item">
+      <h3>測試消息</h3>
+      <time>2025-08-01</time>
+      <p>測試消息</p>
+    </div>
+
+    <div class="news-item">
+      <h3>測試消息</h3>
+      <time>2025-07-20</time>
+      <p>測試消息</p>
+    </div>
+
+    <div class="news-item">
+      <h3>測試消息</h3>
+      <time>2025-07-01</time>
+      <p>測試消息</p>
+    </div>
+
+    <div class="news-item">
+      <h3>測試消息</h3>
+      <time>2025-07-01</time>
+      <p>測試消息</p>
     </div>
   </div>
+
+  <!-- 分頁按鈕容器（base.njk 的 JS 會自動接管） -->
+  <div class="pagination" aria-label="pagination"></div>
 </section>
 
 <section class="about-section">
-  <h2 class="section-title">關於我們</h2>
-  <p>
-    創立於2011年。代理歐洲德國知名品牌REKTOL.MITANOL授權為台灣 總代理,並逐步拓展至 技術培訓課程、特殊維修零件工具及汽車電腦診斷儀器領域. 2018年,化學品牌誕生,提供完整的汽車養護方案，成為值得信賴的專業品牌
+  <h2 class="section-title" data-i18n="sections.about">關於我們</h2>
+  <p data-i18n="about.desc.long">
+    創立於 2011 年，代理德國品牌 REKTOL、MITANOL，授權為台灣總代理，並逐步拓展至技術培訓課程、特殊維修零件工具與汽車電腦診斷儀器領域。2018 年自有化學品牌誕生，提供完整的汽車養護方案，成為值得信賴的專業品牌。
+  </p>
 </section>
 
-<!-- 第一張：從左進場 -->
+<!-- 品牌介紹：從左進場 -->
 <div class="category-row animate-left">
-  <img src="/images/mitan.jpg" alt="潤滑油">
+  <img src="/images/mitan.jpg" alt="MITANOL 品牌形象">
   <div class="category-info">
-    <h3>潤滑油</h3>
-    <p>高性能潤滑油，延長引擎壽命。</p>
+    <h3 data-i18n="brand.mitan.title">MITANOL</h3>
+    <p data-i18n="brand.mitan.desc">
+      自 1985 年成立以來，Mitan Oil 持續在全球能源市場深耕，總部位於德國安庫姆，產品行銷超過 70 國。我們以高效、可靠、安全為核心，提供全方位潤滑油與燃料解決方案，快速回應市場需求，與合作夥伴建立長久信任。
+    </p>
   </div>
 </div>
 
-<!-- 第二張：從右進場 -->
+<!-- 品牌介紹：從右進場 -->
 <div class="category-row reverse animate-right">
-  <img src="/images/rektol.jpg" alt="汽油油精">
+  <img src="/images/rektol.jpg" alt="REKTOL 品牌形象">
   <div class="category-info">
-    <h3>汽油油精</h3>
-    <p>提升燃燒效率，降低碳積。</p>
+    <h3 data-i18n="brand.rektol.title">REKTOL</h3>
+    <p data-i18n="brand.rektol.desc">
+      超過 133 年專注於德國研發與生產高性能潤滑油。以尊重為基礎的合作理念，持續投入創新製程、包裝與產品開發，並提供客製化解決方案，讓團隊能靈活迅速運作，緊貼國際市場趨勢。
+    </p>
   </div>
 </div>
-
-
-
-

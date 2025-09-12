@@ -172,11 +172,51 @@
     }
     .category-row.show{ opacity:1; transform:translateY(0); }
     .category-row:hover{ box-shadow:0 16px 36px rgba(0,0,0,.45); }
-    .category-row img{ width:40%; height:500px; object-fit:cover; filter:saturate(1.02) contrast(1.02); transition:transform .6s var(--ease), filter .35s var(--ease); }
+    .category-row img{ width:30%; height:500px; object-fit:cover; filter:saturate(1.02) contrast(1.02); transition:transform .6s var(--ease), filter .35s var(--ease); }
     .category-row:hover img{ transform:scale(1.03); filter:saturate(1.08) contrast(1.06); }
     .category-info{ flex:1; padding:26px 24px; color:#dfe6f2; }
-    .category-info h3{ margin-bottom:10px; font-size:1.28rem; letter-spacing:.4px; color:#F7F9FD; text-shadow:0 1px 0 rgba(255,255,255,.04); }
-    .category-info p{ font-size:1rem; color:#A9B3C2; }
+    .category-info h3 {
+      display: flex;
+      align-items: center;
+      gap: 12px; /* 標題與 logo 間距 */
+      font-size: 3.8rem;       /* 原本 1.28rem → 放大 */
+      font-weight: 700;
+      color: #F7F9FD;
+      text-shadow: 0 2px 4px rgba(0,0,0,.3);
+    }
+    
+    .category-info p {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: #A9B3C2;
+  position: relative;
+  padding-left: 14px; /* 讓出空間給左線 */
+}
+
+.category-info p::before {
+  content: "";
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+  bottom: 0.4em;
+  width: 3px;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+  opacity: 0.6;
+}
+
+
+    /* 標題左側品牌 logo */
+    .category-info h3 img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      background: rgba(255,255,255,0.85);  /* 半透明白底 */
+      padding: 8px;
+      border-radius: 12px;                 /* 圓角方塊 */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
     .category-row.reverse{ flex-direction:row-reverse; }
 
     /* ===== 商品卡 ===== */
@@ -413,9 +453,12 @@
 
 <!-- 品牌介紹：從左進場 -->
 <div class="category-row animate-left">
-  <img src="/images/mitan.jpg" alt="MITANOL 品牌形象">
+  <img src="/images/mitan1.png" alt="MITANOL 品牌形象">
   <div class="category-info">
-    <h3 data-i18n="brand.mitan.title">MITANOL</h3>
+    <h3>
+      <img src="/images/mitan-logo.png" alt="Mitan Logo">
+      MITANOL
+    </h3>
     <p data-i18n="brand.mitan.desc">
       自 1985 年成立以來，Mitan Oil 持續在全球能源市場深耕，總部位於德國安庫姆，產品行銷超過 70 國。我們以高效、可靠、安全為核心，提供全方位潤滑油與燃料解決方案，快速回應市場需求，與合作夥伴建立長久信任。
     </p>
@@ -424,9 +467,12 @@
 
 <!-- 品牌介紹：從右進場 -->
 <div class="category-row reverse animate-right">
-  <img src="/images/rektol.jpg" alt="REKTOL 品牌形象">
+  <img src="/images/rektol1.png" alt="REKTOL 品牌形象">
   <div class="category-info">
-    <h3 data-i18n="brand.rektol.title">REKTOL</h3>
+    <h3>
+      <img src="/images/rektol-logo.png" alt="Rektol Logo">
+      汽油油精
+    </h3>
     <p data-i18n="brand.rektol.desc">
       超過 133 年專注於德國研發與生產高性能潤滑油。以尊重為基礎的合作理念，持續投入創新製程、包裝與產品開發，並提供客製化解決方案，讓團隊能靈活迅速運作，緊貼國際市場趨勢。
     </p>
